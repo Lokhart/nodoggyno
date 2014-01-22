@@ -1,10 +1,8 @@
-Chef::Log.info("foooooooooooooooooooooo")
-Chef::Log.info(">>>>> #{node[:deployed_to_path]} <<<<<")
-Chef::Log.info(">>>>> #{node[:environment_variables]} <<<<<")
- 
-execute 'bluepill' do
-cwd "#{node[:deployed_to_path]}/current"
-command 'bundle exec bluepill --no-privileged load config/bluepill.pill'
-user 'deploy'
-group 'nginx'
+node[:deploy].each do |application, deploy|
+    Chef::Log.info(">>>>>>>>>>>>>>>>>>>>>>> #{deploy[:deploy_to]}")
+    owner deploy[:user]
+    group deploy[:group]
+    cwd "#{node[:deployed_to_path]}/current"
+    command 'bundle exec bluepill --no-privileged load config/bluepill.pill'
 end
+
