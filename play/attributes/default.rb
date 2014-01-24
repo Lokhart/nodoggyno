@@ -1,1 +1,1 @@
-default[:wmserver][:config][:support_email] = "support@wemonitorhome.com"
+default[:wmserver][:config][:support_email] = "nobody@example.com"
